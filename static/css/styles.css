@@ -1,0 +1,19 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+.navbar-brand {
+    font-weight: bold;
+}
+
+.alert {
+    margin-top: 10px;
+}
+
+.card {
+    margin-bottom: 15px;
+}
+
+footer {
+    margin-top: 20px;
+}

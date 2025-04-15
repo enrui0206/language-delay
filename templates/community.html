@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>社区支持</h2>
+<p>在这里分享您的经验或寻求支持！</p>
+{% if message %}
+    <div class="alert alert-success">{{ message }}</div>
+{% endif %}
+{% if username %}
+    <form method="post" action="/community">
+        <div class="mb-3">
+            <label for="title" class="form-label">标题</label>
+            <input type="text" class="form-control" id="title" name="title" required>
+        </div>
+        <div class="mb-3">
+            <label for="content" class="form-label">内容</label>
+            <textarea class="form-control" id="content" name="content" rows="3" required></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="author" class="form-label">您的名字</label>
+            <input type="text" class="form-control" id="author" name="author" value="{{ username }}" readonly>
+        </div>
+        <button type="submit" class="btn btn-primary">发布</button>
+    </form>
+{% else %}
+    <p>请先<a href="/login">登录</a>以发布帖子。</p>
+{% endif %}
+<h3 class="mt-4">帖子列表</h3>
+{% for post in posts %}
+    <div class="card mt-3">
+        <div class="card-body">
+            <h5 class="card-title">{{ post.title }}</h5>
+            <p class="card-text">{{ post.content }}</p>
+            <p class="card-text"><small class="text-muted">作者：{{ post.author }} | 发布时间：{{ post.created_at }}</small></p>
+        </div>
+    </div>
+{% else %}
+    <p>暂无帖子，快来发布第一条吧！</p>
+{% endfor %}
+{% endblock %}

@@ -1,0 +1,21 @@
+[package]
+name = "language_delay_rust"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+actix-web = "4.4"              # Web框架
+actix-files = "0.6"            # 静态文件服务
+actix-session = { version = "0.10.1", features = ["cookie-session"] } # 会话管理
+tera = "1.19"                  # 模板引擎
+serde = { version = "1.0", features = ["derive"] }  # 序列化/反序列化
+diesel = { version = "2.0", features = ["sqlite", "r2d2", "chrono"] }
+r2d2 = "0.8"
+diesel_migrations = "2.1"  # Optional, if you're using migrations
+libsqlite3-sys = { version = "0.32", features = ["bundled"] } # SQLite依赖
+dotenv = "0.15"         # 0.17.0 # 环境变量
+chrono = { version = "0.4", features = ["serde"] }  # 日期时间处理
+jsonwebtoken = "9.2"           # JWT认证
+bcrypt = "0.17.0"                # 密码加密
+futures-util = "0.3.31"
+actix-multipart = "0.7.2"

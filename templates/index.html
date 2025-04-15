@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>欢迎使用语言发育迟缓支持平台</h2>
+<p>我们致力于帮助家长了解儿童语言发育问题，提供筛查工具、社区支持和专业资源。</p>
+<div class="row">
+    <div class="col-md-3">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">科普教育</h5>
+                <p class="card-text">了解语言发育迟缓的症状和原因。</p>
+                <a href="/education" class="btn btn-primary">了解更多</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">自我筛查</h5>
+                <p class="card-text">通过简单问卷初步评估孩子的语言发育情况。</p>
+                <a href="/screening" class="btn btn-primary">开始筛查</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">社区支持</h5>
+                <p class="card-text">与其他家长交流经验，获取支持。</p>
+                <a href="/community" class="btn btn-primary">加入社区</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">资源链接</h5>
+                <p class="card-text">获取专业资源和帮助。</p>
+                <a href="/resources" class="btn btn-primary">查看资源</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
