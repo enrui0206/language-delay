@@ -14,3 +14,13 @@ CREATE TABLE posts (
     user_id INTEGER NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users(id)
 );
+
+CREATE TABLE screening_results (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER NOT NULL,
+    age_months INTEGER NOT NULL,
+    score INTEGER NOT NULL,
+    result TEXT NOT NULL,
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id)
+);

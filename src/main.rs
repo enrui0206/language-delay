@@ -5,6 +5,8 @@ use tera::Tera;
 use diesel::prelude::*;
 use diesel::r2d2::{self, ConnectionManager};
 use std::path::PathBuf;
+use winres::WindowsResource;
+
 mod models;
 mod schema;
 mod routes;
@@ -24,19 +26,31 @@ async fn main() -> std::io::Result<()> {
 
     println!("Base directory: {}", base_dir.display());
 
+        // Create absolute paths..
+    /*if cfg!(target_os = "windows") {
+        if cfg!(target_os = "windows") {
+            let res = winres::WindowsResource::new()
+                .set_icon("icon.ico") // optional
+                .compile();
+
+            if let Err(e) = res {
+                println!("cargo:warning=winres error: {:?}", e);
+            }
+        }
+    }*/
     // Create absolute paths
     let db_path = base_dir.join("language_delay.db");
     let templates_path = base_dir.join("templates/**/*");
     let static_path = base_dir.join("static");
     let uploads_path = base_dir.join("uploads");
 
-    // 初始化数据库连接池
+    // initialize database connection pool
     let manager = ConnectionManager::<SqliteConnection>::new(db_path.to_str().unwrap());
     let pool = r2d2::Pool::builder()
         .build(manager)
         .expect("Failed to create pool");
 
-    // 初始化 Tera 模板引擎
+    // initialize Tera template engine
     let tera = match Tera::new(templates_path.to_str().unwrap()) {
         Ok(t) => t,
         Err(e) => {
@@ -44,10 +58,11 @@ async fn main() -> std::io::Result<()> {
             std::process::exit(1);
         }
     };
-    // 初始化会话
+
+    // Initialize session secret key
     let secret_key = actix_web::cookie::Key::generate();
 
-    // 确保 uploads 目录存在
+    // ensures uploads directory exists
     std::fs::create_dir_all(&uploads_path).unwrap();
 
     println!("Server running at http://127.0.0.1:8000");
