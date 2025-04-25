@@ -1,33 +1,56 @@
 {% extends "base.html" %}
 {% block content %}
 <h2>自我筛查</h2>
-<p>请回答以下问题，初步评估您孩子的语言发育情况（仅供参考）。</p>
-<form id="screeningForm">
-    <div class="mb-3">
-        <label class="form-label">1. 您的孩子 2 岁时是否能说 50 个以上的单词？（如“妈妈”、“吃饭”）</label>
-        <div>
-            <input type="radio" name="q1" value="yes" id="q1_yes"> <label for="q1_yes">是</label>
-            <input type="radio" name="q1" value="no" id="q1_no"> <label for="q1_no">否</label>
-        </div>
-    </div>
-    <div class="mb-3">
-        <label class="form-label">2. 您的孩子 3 岁时是否能用短句表达需求？（如“我要喝水”）</label>
-        <div>
-            <input type="radio" name="q2" value="yes" id="q2_yes"> <label for="q2_yes">是</label>
-            <input type="radio" name="q2" value="no" id="q2_no"> <label for="q2_no">否</label>
-        </div>
-    </div>
-    <div class="mb-3">
-        <label class="form-label">3. 您的孩子是否经常无法理解简单的指令？（如“把玩具拿过来”）</label>
-        <div>
-            <input type="radio" name="q3" value="yes" id="q3_yes"> <label for="q3_yes">是</label>
-            <input type="radio" name="q3" value="no" id="q3_no"> <label for="q3_no">否</label>
-        </div>
-    </div>
-    <button type="button" class="btn btn-primary" onclick="evaluate()">提交</button>
+<p>请先输入您孩子的年龄，然后回答问题，系统将初步评估孩子的语言发育情况（仅供参考）。</p>
+
+<!-- 年龄输入 -->
+<div class="mb-4">
+    <label for="age_years" class="form-label">孩子的年龄（年）</label>
+    <select id="age_years" class="form-select d-inline w-auto" onchange="loadQuestions()">
+        <option value="1">1 岁</option>
+        <option value="2">2 岁</option>
+        <option value="3">3 岁</option>
+        <option value="4">4 岁</option>
+        <option value="5">5 岁</option>
+    </select>
+    <label for="age_months" class="form-label ms-2">（月）</label>
+    <select id="age_months" class="form-select d-inline w-auto" onchange="loadQuestions()">
+        <!-- 动态生成 0-11 个月 -->
+    </select>
+</div>
+
+<!-- 加载 screening.js，确保 evaluate() 在按钮之前定义 -->
+<script src="/static/js/screening.js?v={{ now() }}"></script>
+
+<!-- 问卷 -->
+<form id="screeningForm" style="display: none;">
+    <h4>请回答以下问题</h4>
+    <div id="questions"></div>
+    <button type="button" class="btn btn-primary mt-3" id="submitButton">提交</button>
 </form>
+
+<!-- 结果 -->
 <div id="result" class="mt-3"></div>
 {% endblock %}
+
 {% block scripts %}
-<script src="/static/js/screening.js"></script>
+<script>
+    // 初始化月份选项
+    function updateAgeMonths() {
+        const monthsSelect = document.getElementById('age_months');
+        monthsSelect.innerHTML = '';
+        for (let i = 0; i < 12; i++) {
+            const option = document.createElement('option');
+            option.value = i;
+            option.text = i;
+            monthsSelect.appendChild(option);
+        }
+    }
+
+    // 页面加载时初始化
+    document.addEventListener('DOMContentLoaded', () => {
+        updateAgeMonths();
+        loadQuestions();
+    });
+</script>
 {% endblock %}

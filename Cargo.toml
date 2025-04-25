@@ -16,6 +16,8 @@ libsqlite3-sys = { version = "0.32", features = ["bundled"] } # SQLite依赖
 dotenv = "0.15"         # 0.17.0 # 环境变量
 chrono = { version = "0.4", features = ["serde"] }  # 日期时间处理
 jsonwebtoken = "9.2"           # JWT认证
-bcrypt = "0.17.0"                # 密码加密
+bcrypt = "0.17.0"                # encryption
 futures-util = "0.3.31"
 actix-multipart = "0.7.2"
+winres = "0.1"
+serde_json = "1.0.140"

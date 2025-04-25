@@ -5,8 +5,8 @@ use chrono::{Utc, Duration};
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Claims {
-    pub sub: String,  // 用户名
-    pub exp: usize,   // 过期时间
+    pub sub: String,  // username
+    pub exp: usize,   // expiration
 }
 
 pub fn hash_password(password: &str) -> Result<String, bcrypt::BcryptError> {
