@@ -51,7 +51,7 @@
             "webRoot": "${workspaceFolder}",
             "sourceMaps": true,
             "trace": true,
-            "runtimeExecutable": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe", // 确保 Edge 可执行文件路径正确
+            "runtimeExecutable": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe", // make sure this path is correct
             "runtimeArgs": [
                 "--remote-debugging-port=9222"
             ]
